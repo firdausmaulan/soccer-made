@@ -1,6 +1,6 @@
 package com.fd.soccer
 
-import androidx.multidex.MultiDexApplication
+import android.app.Application
 import com.fd.core.di.databaseModule
 import com.fd.core.di.networkModule
 import com.fd.core.di.repositoryModule
@@ -11,7 +11,7 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 
-class MainApplication : MultiDexApplication() {
+class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {
