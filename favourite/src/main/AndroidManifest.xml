@@ -5,13 +5,10 @@
     package="com.fd.soccer.favourite">
 
     <dist:module
-        dist:instant="false"
+        dist:instant="true"
+        dist:onDemand="false"
         dist:title="@string/title_favourite">
-        <dist:delivery>
-            <dist:install-time />
-        </dist:delivery>
-
-        <dist:fusing dist:include="false" />
+        <dist:fusing dist:include="true" />
     </dist:module>
 
     <application tools:ignore="AllowBackup">
