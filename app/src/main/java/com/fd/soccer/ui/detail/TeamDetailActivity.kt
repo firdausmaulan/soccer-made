@@ -3,7 +3,6 @@ package com.fd.soccer.ui.detail
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
 import com.fd.core.domain.model.Team
 import com.fd.core.utils.Constant
 import com.fd.core.utils.load

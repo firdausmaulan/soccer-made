@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.fd.core.R
 import com.fd.core.databinding.ItemListTeamBinding
 import com.fd.core.domain.model.Team
