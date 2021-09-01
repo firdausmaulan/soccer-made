@@ -1,0 +1,64 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+}
+apply from: '../shared_dependencies.gradle'
+
+def secretPropertiesFile = rootProject.file("secret.properties")
+def secretProperties = new Properties()
+secretProperties.load(new FileInputStream(secretPropertiesFile))
+
+android {
+    signingConfigs {
+        release {
+            keyAlias secretProperties['ALIAS']
+            keyPassword secretProperties['PASSWORD']
+            storeFile file(secretProperties['KEYSTORE'])
+            storePassword secretProperties['PASSWORD']
+        }
+        debug {
+            storeFile file('../debug.keystore')
+        }
+    }
+
+    compileSdkVersion 30
+
+    defaultConfig {
+        applicationId "com.fd.soccer"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding = true
+    }
+    dynamicFeatures = [':favourite']
+}
+
+dependencies {
+    implementation project(":core")
+}
