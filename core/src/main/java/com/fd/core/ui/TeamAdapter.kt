@@ -3,12 +3,14 @@ package com.fd.core.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.fd.core.R
 import com.fd.core.databinding.ItemListTeamBinding
 import com.fd.core.domain.model.Team
 import com.fd.core.utils.load
 import java.util.*
+
 
 class TeamAdapter : RecyclerView.Adapter<TeamAdapter.ListViewHolder>() {
 
@@ -17,9 +19,11 @@ class TeamAdapter : RecyclerView.Adapter<TeamAdapter.ListViewHolder>() {
 
     fun setData(newListData: List<Team>?) {
         if (newListData == null) return
+        val diffUtilCallback = TeamDiffUtilCallback(listData, newListData)
+        val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
         listData.clear()
         listData.addAll(newListData)
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
